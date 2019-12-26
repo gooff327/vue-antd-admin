@@ -1,7 +1,14 @@
 <template>
   <a-layout style="width: 100vw; height: 100vh" id="components-layout-demo-custom-trigger">
     <a-layout-sider :trigger="null" collapsible v-model="collapsed">
-      <div class="logo" />
+      <transition name="component-fade" mode="out-in">
+      <div class="logo">
+        <a-icon class="logo-icon" type="ant-design" />
+        <span v-if="!collapsed">
+          Vue Antd Admin
+        </span>
+      </div>
+      </transition>
       <menu-utils :menus="$store.getters.menus"/>
     </a-layout-sider>
     <a-layout>
@@ -11,15 +18,21 @@
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="()=> collapsed = !collapsed"
         />
-      </a-layout-header>
+        <a-breadcrumb>
+          <a-breadcrumb-item v-for="(item, index) of this.$route.matched" :key="index">
+            <a-icon :type="item.meta.icon" />
+            <span>{{item.name}}</span>
+          </a-breadcrumb-item>
+        </a-breadcrumb>
 
-      <transition name="component-fade" mode="out-in">
-          <a-layout-content
-            :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
-          >
+      </a-layout-header>
+        <a-layout-content
+          :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+        >
+          <transition name="component-fade" mode="out-in">
             <router-view/>
+          </transition>
           </a-layout-content>
-      </transition>
     </a-layout>
   </a-layout>
 </template>
@@ -38,15 +51,16 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$route.matched)
   }
 }
 </script>
 
-<style>
+<style lang="stylus">
   #components-layout-demo-custom-trigger .trigger {
     font-size: 18px;
     line-height: 64px;
-    padding: 0 24px;
+    padding: 3px 24px;
     cursor: pointer;
     transition: color 0.3s;
     float: left;
@@ -56,19 +70,26 @@ export default {
     color: #1890ff;
   }
 
-  #components-layout-demo-custom-trigger .logo {
+  #components-layout-demo-custom-trigger .logo
     height: 32px;
     background: rgba(255, 255, 255, 0.2);
     margin: 16px;
-  }
+    color: rgb(26,182,126);
+    line-height 32px
+    font-weight bold
+    .logo-icon
+      color #e96f81
 
-  .component-fade-enter-active, .component-fade-leave-active {
+  .ant-breadcrumb
+    text-align left
+    line-height 64px !important
+
+  .component-fade-enter-active, .component-fade-leave-active
     transition: opacity .3s ease;
-  }
+
   .component-fade-enter, .component-fade-leave-to
-    /* .component-fade-leave-active for below version 2.1.8 */ {
-    opacity: 0;
-  }
+    opacity: 0
+
   .progress {
     position: fixed;
     top: 64px;

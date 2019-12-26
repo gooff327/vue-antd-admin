@@ -3,15 +3,22 @@ const layout = {
         menus: [
             {
                 name: 'Dashboard',
-                icon: 'dashboard',
                 path: '/dashboard',
-                role: [1,2,3,4,5,6]
+                component: () => import('@/views/Dashboard'),
+                meta: {
+                    icon: 'dashboard',
+                    role: [1,2,3,4,5,6]
+                },
             },
             {
                 name: 'Permission',
                 icon: 'team',
                 path: '/permission',
-                role: [1,2,3,4,5,6],
+                component: () => import('@/views/Permission'),
+                meta: {
+                    icon: 'team',
+                    role: [1,2,3,4,5,6]
+                },
             },
         ]
 

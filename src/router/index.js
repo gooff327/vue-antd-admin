@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import store from '../store'
 Vue.use(VueRouter)
 
-const routes = [
+export const staticRoutes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'Home',
+    component: Home,
+    children: store.getters.menus,
+    meta: {
+      icon: 'home'
+    }
   },
   {
     path: '/about',
@@ -20,23 +24,19 @@ const routes = [
   }
 ];
 
-const scrollBehavior = function (to, from, savedPosition) {
-  if (savedPosition) {
-    return savedPosition
-  } else {
-    const position = {};
-    if (to.hash) {
-      position.selector = to.hash;
-      return position
+const createRouter = () => new VueRouter({
+  mode: 'history',
+  scrollBehavior: (to, from, savedPosition) => { // only available in HTML5 history mode
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {x: 0, y: 0}
     }
-    return false
-
-  }
-};
-
-const router = new VueRouter({
-  routes,
-  scrollBehavior
+  },
+  routes: staticRoutes
 });
+
+const router = createRouter();
 export default router
+
 

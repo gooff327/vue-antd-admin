@@ -5,17 +5,24 @@
             menus: { require: true }
         },
         render: function (h) {
-            function generate(menu) {
+            function generate(menu, context) {
                 if (menu.hasOwnProperty('children')) {
                     return h('a-sub-menu', {
                         props: {
-                            key: menu.name, icon: menu.icon
+                            key: menu.name,
+                            icon: menu.meta.icon
+                        },
+                        on: {
+                            click: () => {
+                                if (context.$route.path !== menu.path) {
+                                    context.$router.push(menu.path)
+                                }                            }
                         },
                         scopedSlots: {
                             title: () => h('span', [
                                 h('a-icon', {
                                     props: {
-                                        type: menu.icon
+                                        type: menu.meta.icon
                                     }
                                 }),
                                 h('span', menu.name)
@@ -27,15 +34,22 @@
                     return h('a-menu-item', {
                         props: {
                             key: menu.name
-                        }
+                        },
+                        on: {
+                            click: () => {
+                                if (context.$route.path !== menu.path) {
+                                    context.$router.push(menu.path)
+                                }
+                            }
+                        },
                         },
                         [
-                            h('a-icon', { props: {type: menu.icon} }),
+                            h('a-icon', { props: {type: menu.meta.icon} }),
                             h('span', menu.name)
                         ])
                 }
             }
-            return h('a-menu', { props:{theme:"dark", mode:"inline"}, defaultSelectedKeys: [this.menus[0].name]}, this.menus.map(menu => generate(menu)))
+            return h('a-menu', { props:{theme:"dark", mode:"inline"}, defaultSelectedKeys: [this.menus[0].name]}, this.menus.map(menu => generate(menu, this)))
 
         },
     }
