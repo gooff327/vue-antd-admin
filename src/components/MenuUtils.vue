@@ -49,7 +49,7 @@
                         ])
                 }
             }
-            return h('a-menu', { props:{theme:"dark", mode:"inline"}, defaultSelectedKeys: [this.menus[0].name]}, this.menus.map(menu => generate(menu, this)))
+            return h('a-menu', { props:{theme:"dark", mode:"inline", defaultSelectedKeys: `['Dashboard']`}}, this.menus.map(menu => generate(menu, this)))
 
         },
     }

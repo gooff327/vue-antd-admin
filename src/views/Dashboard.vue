@@ -58,6 +58,15 @@
 </script>
 
 <style lang="stylus" scoped>
+    @keyframes scale_animate
+        0%
+            transform scale(1)
+        20%
+            transform scale(0.8)
+        70%
+            transform scale(1.6)
+        100%
+            transform scale(1)
 
     .dashboard-wrapper
         width 100%
@@ -68,9 +77,12 @@
             background-color rgba(0,0,0,0.05)
             padding-left 25%
             padding-right 25%
+            border-radius 6px
             display flex
             justify-content center
             align-items center
+            &:hover
+                box-shadow: 0 0 12px 2px rgba(189,189,189,.5);
             .star
                 color #42b983
             .eye
@@ -82,12 +94,15 @@
             .anticon
                 flex 1
                 font-size 30px
-
+            .anticon:hover
+                animation scale_animate .5s
+                animation-timing-function: cubic-bezier(0.1, -0.6, 0.2, 0);
             span
                 flex 1
                 font-weight bold
                 font-size larger
                 font-family "Comic Sans MS"
+
 
 
 
