@@ -26,7 +26,7 @@ export const staticRoutes = [
 ];
 
 const createRouter = () => new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   scrollBehavior: (to, from, savedPosition) => { // only available in HTML5 history mode
     if (savedPosition) {
       return savedPosition
