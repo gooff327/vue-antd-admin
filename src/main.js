@@ -12,13 +12,11 @@ Vue.use(Antd);
 Vue.prototype.$nprogress = NProgress;
 
 router.beforeEach((to, from, next) => {
-  console.log('router_beforeEach_hook', to, from);
   NProgress.start();
   next()
 });
 
-router.afterEach((to, from) => {
-  console.log('router_afterEach_hook', to, from);
+router.afterEach(() => {
   NProgress.done();
 });
 

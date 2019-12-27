@@ -50,9 +50,6 @@ export default {
       collapsed: false,
     }
   },
-  mounted() {
-    console.log(this.$route.matched)
-  }
 }
 </script>
 

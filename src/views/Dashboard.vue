@@ -3,25 +3,25 @@
         <a-row :gutter="20">
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <div class="block-wrapper">
-                    <a-icon type="star"/>
+                    <a-icon class="star" type="star"/>
                     <span>{{this.stargazers_count}}</span>
                 </div>
             </a-col>
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <div class="block-wrapper">
-                    <a-icon type="eye"/>
+                    <a-icon class="eye" type="eye"/>
                     <span>{{this.stargazers_count}}</span>
                 </div>
             </a-col>
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <div class="block-wrapper">
-                    <a-icon type="save"/>
+                    <a-icon class="save" type="save"/>
                     <span>{{this.forks}}</span>
                 </div>
             </a-col>
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <div class="block-wrapper">
-                    <a-icon type="message"/>
+                    <a-icon class="message" type="message"/>
                     <span>{{this.open_issues_count}}</span>
                 </div>
             </a-col>
@@ -58,6 +58,7 @@
 </script>
 
 <style lang="stylus" scoped>
+
     .dashboard-wrapper
         width 100%
         height 100%
@@ -65,4 +66,29 @@
             height 200px
             line-height 200px
             background-color rgba(0,0,0,0.05)
+            padding-left 25%
+            padding-right 25%
+            display flex
+            justify-content center
+            align-items center
+            .star
+                color #42b983
+            .eye
+                color #1890ff
+            .save
+                color lightcoral
+            .message
+                color deeppink
+            .anticon
+                flex 1
+                font-size 30px
+
+            span
+                flex 1
+                font-weight bold
+                font-size larger
+                font-family "Comic Sans MS"
+
+
+
 </style>

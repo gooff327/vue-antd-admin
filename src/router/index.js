@@ -9,6 +9,7 @@ export const staticRoutes = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/dashboard',
     children: store.getters.menus,
     meta: {
       icon: 'home'
