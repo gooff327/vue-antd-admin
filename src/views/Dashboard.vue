@@ -34,6 +34,7 @@
                 </a-tooltip>
             </a-col>
         </a-row>
+        <br>
         <a-row>
             <a-col :span="24">
                 <canvas style="position: relative; height:60vh; width:95%" ref="lineChart"/>
