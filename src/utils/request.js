@@ -11,7 +11,6 @@ export const Request = Axios.create({
     baseURL: baseURL
 });
 
-Request.defaults.withCredentials = true;
 
 export default class baseRequest {
     constructor() {
