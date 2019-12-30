@@ -4,12 +4,14 @@
         props: {
             menus: { require: true }
         },
+        mounted() {
+            this.$refs['menu'].$el.children[0].click()
+        },
         render: function (h) {
             function generate(menu, context) {
                 if (menu.hasOwnProperty('children')) {
                     return h('a-sub-menu', {
                         props: {
-                            key: menu.name,
                             icon: menu.meta.icon
                         },
                         on: {
@@ -33,7 +35,7 @@
                 } else {
                     return h('a-menu-item', {
                         props: {
-                            key: menu.name
+                            icon: menu.meta.icon
                         },
                         on: {
                             click: () => {
@@ -49,8 +51,7 @@
                         ])
                 }
             }
-            return h('a-menu', { props:{theme:"dark", mode:"inline", defaultSelectedKeys: ['Dashboard']}}, this.menus.map(menu => generate(menu, this)))
-
+            return h('a-menu', { ref: 'menu', props:{theme:"dark", mode:"inline"}}, this.menus.map(menu => generate(menu, this)))
         },
     }
 </script>
