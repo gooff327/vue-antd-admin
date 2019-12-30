@@ -1,10 +1,11 @@
 {
   "name": "vue-antd-admin",
   "version": "0.1.0",
-  "private": true,
+  "private": fasle,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "publish": "bash deploy.sh",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },

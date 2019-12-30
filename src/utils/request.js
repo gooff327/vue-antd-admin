@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const baseURL = process.env.NODE_ENV === 'development' ? 'https://api.github.com' : '';
+const baseURL = process.env.NODE_ENV === 'development' ? 'https://api.github.com' : 'https://api.github.com';
 const headers = {
     'Accept': "*",
     "Content-type": "application/json"
