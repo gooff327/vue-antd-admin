@@ -28,8 +28,8 @@
 
 
             </a-layout-header>
-            <a-layout-content
-                    :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+            <a-layout-content class="content"
+                    :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px'}"
             >
                 <transition mode="out-in" name="component-fade">
                     <router-view/>
@@ -98,8 +98,13 @@
     .component-fade-enter, .component-fade-leave-to
         opacity: 0
 
-    .progress {
-        position: fixed;
-        top: 64px;
-    }
+    .content
+        margin 24px 16px
+        padding 24px
+        background rgb(255, 255, 255)
+        min-height 280px
+        overflow scroll
+    .progress
+        position fixed
+        top 64px
 </style>
