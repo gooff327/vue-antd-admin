@@ -2,28 +2,36 @@
     <section class="dashboard-wrapper">
         <a-row :gutter="20">
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <div class="block-wrapper">
-                    <a-icon class="star" type="star"/>
-                    <span>{{this.stargazers_count}}</span>
-                </div>
+                <a-tooltip title="Stars of ant-design-vue">
+                    <div @click="jumpToAntdRepo" class="block-wrapper">
+                        <a-icon class="star" type="star"/>
+                        <span>{{this.stargazers_count}}</span>
+                    </div>
+                </a-tooltip>
             </a-col>
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <div class="block-wrapper">
-                    <a-icon class="eye" type="eye"/>
-                    <span>{{this.stargazers_count}}</span>
-                </div>
+                <a-tooltip title="Watch count of ant-design-vue">
+                    <div @click="jumpToAntdRepo" class="block-wrapper">
+                        <a-icon class="eye" type="eye"/>
+                        <span>{{this.stargazers_count}}</span>
+                    </div>
+                </a-tooltip>
             </a-col>
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <div class="block-wrapper">
-                    <a-icon class="save" type="save"/>
-                    <span>{{this.forks}}</span>
-                </div>
+                <a-tooltip title="Forks of ant-design-vue">
+                    <div @click="jumpToAntdRepo" class="block-wrapper">
+                        <a-icon class="save" type="save"/>
+                        <span>{{this.forks}}</span>
+                    </div>
+                </a-tooltip>
             </a-col>
             <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <div class="block-wrapper">
-                    <a-icon class="message" type="message"/>
-                    <span>{{this.open_issues_count}}</span>
-                </div>
+                <a-tooltip title="Issues of ant-design-vue">
+                    <div @click="jumpToAntdRepo" class="block-wrapper">
+                        <a-icon class="message" type="message"/>
+                        <span>{{this.open_issues_count}}</span>
+                    </div>
+                </a-tooltip>
             </a-col>
         </a-row>
         <a-row>
@@ -55,7 +63,7 @@
     export default {
         name: "Dashboard",
         async mounted() {
-            await this.$nextTick()
+            await this.$nextTick();
             this.initChart('lineChart', 'line');
             this.initChart('barChart', 'bar');
             this.initChart('bubbleChart', 'bubble');
@@ -82,6 +90,9 @@
             }
         },
         methods: {
+            jumpToAntdRepo () {
+                window.open('https://github.com/vueComponent/ant-design-vue')
+            },
             initData() {
                 this.api.dashboard.repositoryInfos().then(res => {
                     this.stargazers_count = res.data.stargazers_count;
@@ -173,10 +184,16 @@
                                 labelString: 'Time ( UTC )'
                             },
                             type: 'time',
+                            time: {
+                                displayFormats: {
+                                    second: 'h:mm:ss'
+                                }
+                            },
                             ticks: {
+                                source: 'data',
                                 min: moment(new Date()).subtract(3,'s'),
                                 maxRotation: 90,
-                                minRotation: 90
+                                minRotation: 0
                             }
                         }],
                     },
