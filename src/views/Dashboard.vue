@@ -13,7 +13,7 @@
                 <a-tooltip title="Watch count of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="eye" type="eye"/>
-                        <span>{{this.stargazers_count}}</span>
+                        <span>{{this.subscribers_count}}</span>
                     </div>
                 </a-tooltip>
             </a-col>
@@ -78,7 +78,7 @@
         data() {
             return {
                 stargazers_count: 0,
-                watcher_count: 0,
+                subscribers_count: 0,
                 forks: 0,
                 open_issues_count: 0,
                 chartInstance: {},
@@ -97,7 +97,7 @@
             initData() {
                 this.api.dashboard.repositoryInfos().then(res => {
                     this.stargazers_count = res.data.stargazers_count;
-                    this.watcher_count = res.data.watcher_count;
+                    this.subscribers_count = res.data.subscribers_count;
                     this.forks = res.data.forks;
                     this.open_issues_count = res.data.open_issues_count
                 })
