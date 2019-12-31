@@ -9,7 +9,7 @@
             <br>
             <a-alert :message="steps[current].content" :closable="false"/>
             <div class="card-wrapper" v-show="current === 0">
-                <a-card v-for="user of userList" :key="user.id.value" hoverable style="width: 200px">
+                <a-card v-for="user of userList" :key="user.id.value" hoverable style="width: 160px">
                     <img
                             alt="example"
                             :src="user.picture.large"

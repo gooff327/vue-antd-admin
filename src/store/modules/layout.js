@@ -18,6 +18,17 @@ const layout = {
                     icon: 'table',
                     role: [1, 2, 3, 4, 5, 6]
                 },
+                children: [
+                    {
+                        name: 'Users',
+                        path: '/users',
+                        component: () => import('@/views/Users'),
+                        meta: {
+                            icon: 'idcard',
+                            role: [1, 2, 3, 4, 5, 6]
+                        },
+                    }
+                ]
             },
             {
                 name: 'Tool',

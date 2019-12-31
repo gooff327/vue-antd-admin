@@ -1,10 +1,10 @@
 <template>
-    <h1>Dev</h1>
+    <router-view/>
 </template>
 
 <script>
     export default {
-        name: "Tool.vue"
+        name: "Tool"
     }
 </script>
 

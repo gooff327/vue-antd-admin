@@ -63,7 +63,7 @@
                 if (temp !== null) {
                     await this.$store.dispatch('initUsers', temp)
                 } else {
-                    const [res,err] = await this.api.permission.fetchUserList({results: 20}).then(result => [result, null]).catch(e => [null, e]);
+                    const [res,err] = await this.api.permission.fetchUserList({results: 50}).then(result => [result, null]).catch(e => [null, e]);
                     err ? new Error('fetch user list error, check your network connection') : this.$store.dispatch('initUsers', res.data.results);
                 }
             }
