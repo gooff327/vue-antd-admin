@@ -1,26 +1,28 @@
 <template>
-    <a-table
-        :columns="columns"
-        :rowKey="record => record.login.uuid"
-        :dataSource="tableData"
-        bordered
-        :pagination="pagination"
-        :loading="loading"
-        @change="handleTableChange"
-    >
-        <template slot="name" slot-scope="name">
-            {{name.first}} {{name.last}}
-        </template>
-        <template slot="dob" slot-scope="dob">
-            {{dob.age}}
-        </template>
-        <template slot="city" slot-scope="location">
-            {{location.city}}
-        </template>
-        <template slot="state" slot-scope="location">
-            {{location.state}}
-        </template>
-    </a-table>
+    <draggable v-model="tableData" group="people" @start="drag=true" @end="drag=false">
+        <a-table
+            :columns="columns"
+            :rowKey="record => record.login.uuid"
+            :dataSource="tableData"
+            bordered
+            :pagination="pagination"
+            :loading="loading"
+            @change="handleTableChange"
+        >
+            <template slot="name" slot-scope="name">
+                {{name.first}} {{name.last}}
+            </template>
+            <template slot="dob" slot-scope="dob">
+                {{dob.age}}
+            </template>
+            <template slot="city" slot-scope="location">
+                {{location.city}}
+            </template>
+            <template slot="state" slot-scope="location">
+                {{location.state}}
+            </template>
+        </a-table>
+    </draggable>
 </template>
 
 <script>
@@ -28,6 +30,7 @@
         name: "Users",
         data () {
             return {
+                drag: false,
                 columns : [
                     {
                         title: 'Name',
@@ -46,7 +49,7 @@
                             {
                                 title: 'City',
                                 dataIndex: 'location',
-                                key: 'street',
+                                key: 'city',
                                 width: 200,
                                 scopedSlots: { customRender: 'city' },
 
@@ -54,7 +57,7 @@
                             {
                                 title: 'State',
                                 dataIndex: 'location',
-                                key: 'street',
+                                key: 'state',
                                 width: 200,
                                 scopedSlots: { customRender: 'state' },
 

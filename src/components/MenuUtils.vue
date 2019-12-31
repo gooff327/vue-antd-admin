@@ -4,14 +4,26 @@
         props: {
             menus: { require: true }
         },
+        data () {
+            return {
+                openKeys: []
+            }
+        },
         mounted() {
-            this.$refs['menu'].$el.children[0].click()
+            console.log(this.$route);
+            let { matched } = {...this.$route};
+            console.log(matched)
+            if (matched.length > 2) {
+                matched = matched.slice(1,-1);
+                this.openKeys.push(...matched.map(item => item.name))
+            }
         },
         render: function (h) {
             function generate(menu, context) {
                 if (menu.hasOwnProperty('children')) {
                     return h('a-sub-menu', {
-                        props: {
+                            key: menu.name,
+                            props: {
                             icon: menu.meta.icon
                         },
                         scopedSlots: {
@@ -28,13 +40,14 @@
                         menu.children.map(i => generate(i, context)))
                 } else {
                     return h('a-menu-item', {
+                        key: menu.name,
                         props: {
                             icon: menu.meta.icon
                         },
                         on: {
                             click: () => {
                                 if (context.$route.path !== menu.path) {
-                                    context.$router.push(menu.path)
+                                    context.$router.push({name: menu.name})
                                 }
                             }
                         },
@@ -45,7 +58,18 @@
                         ])
                 }
             }
-            return h('a-menu', { ref: 'menu', props:{theme:"dark", mode:"inline"}}, this.menus.map(menu => generate(menu, this)))
+            return h('a-menu',
+                {
+                    on: { "update:openKeys": val => this.openKeys = val},
+                    ref: 'menu',
+                    props: {
+                        theme:"dark",
+                        mode:"inline",
+                        defaultSelectedKeys: [`${this.$route.name}`],
+                        openKeys: this.openKeys
+                    }
+                },
+                this.menus.map(menu => generate(menu, this)))
         },
     }
 </script>

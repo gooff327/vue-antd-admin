@@ -7,7 +7,9 @@ import 'ant-design-vue/dist/antd.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import './request'
+import draggable from 'vuedraggable'
 
+Vue.use(draggable);
 Vue.use(Antd);
 Vue.prototype.$nprogress = NProgress;
 

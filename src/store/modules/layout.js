@@ -21,7 +21,7 @@ const layout = {
                 children: [
                     {
                         name: 'Users',
-                        path: '/users',
+                        path: 'users',
                         component: () => import('@/views/Users'),
                         meta: {
                             icon: 'idcard',
@@ -41,7 +41,7 @@ const layout = {
                 children: [
                     {
                     name: 'Notes',
-                    path: '/notes',
+                    path: 'notes',
                     component: () => import('@/views/Notes'),
                     meta: {
                         icon: 'book',
