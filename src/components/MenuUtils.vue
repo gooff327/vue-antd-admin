@@ -14,12 +14,6 @@
                         props: {
                             icon: menu.meta.icon
                         },
-                        on: {
-                            click: () => {
-                                if (context.$route.path !== menu.path) {
-                                    context.$router.push(menu.path)
-                                }                            }
-                        },
                         scopedSlots: {
                             title: () => h('span', [
                                 h('a-icon', {
@@ -31,7 +25,7 @@
                             ])
                         }
                         },
-                        menu.children.map(i => generate(i)))
+                        menu.children.map(i => generate(i, context)))
                 } else {
                     return h('a-menu-item', {
                         props: {

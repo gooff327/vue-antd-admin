@@ -16,7 +16,9 @@
                             slot="cover"
                     />
                     <template class="ant-card-actions" slot="actions">
-                        <a-checkbox @change="onCheckChange($event, user)"/>
+                        <transition name="fade" mode="out-in">
+                            <a-icon @click="onCheckChange(user)" :type="checkedUsers.hasOwnProperty(user.login.uuid) ? 'check' : 'plus'"/>
+                        </transition>
                     </template>
                     <a-card-meta :title="user.name.first+','+user.name.last" :description= "user.login.username">
                     </a-card-meta>
@@ -24,7 +26,7 @@
             </div>
             <div v-show="current === 1" class="tree-wrapper">
                 <a-tree
-                    checkable
+                    :checkable="true"
                     v-model="checkedMenus"
                     :replaceFields="replaceFields"
                     :treeData="$store.getters.menus"
@@ -32,17 +34,18 @@
             </div>
         </div>
         <div class="steps-action">
-            <a-button v-if="current < steps.length - 1 && Object.keys(checkedUsers).length > 0" type="primary" @click="next">
+            <a-button v-show="current < steps.length - 1 && Object.keys(checkedUsers).length > 0" type="primary" @click="next">
                 Next
             </a-button>
+            <a-button v-show="Object.keys(checkedUsers).length > 0 && current === 0" type="danger">Delete</a-button>
             <a-button
-                    v-if="current === steps.length - 1"
-                    type="primary"
-                    @click="$message.success('Congratulations! All your change have submitted')"
+                v-show="current === steps.length - 1"
+                type="primary"
+                @click="$message.success('Congratulations! All your change have submitted')"
             >
                 Done
             </a-button>
-            <a-button v-if="current>0" style="margin-left: 8px" @click="prev">
+            <a-button v-show="current>0" style="margin-left: 8px" @click="prev">
                 Previous
             </a-button>
         </div>
@@ -74,11 +77,12 @@
                 checkedMenus: [],
                 replaceFields: {
                     title: 'name',
+                    key: 'name'
                 }
             }
         },
         mounted() {
-            this.getUserList();
+            this.userList = this.$store.getters.users
         },
         methods: {
             next () {
@@ -87,15 +91,10 @@
             prev () {
                 this.current --
             },
-            getUserList () {
-                this.api.permission.fetchUserList({results: 10}).then(res => {
-                    this.userList.push(...res.data.results)
-                })
-            },
-            onCheckChange(event, user) {
-                if (event.target.checked === true && !this.checkedUsers.hasOwnProperty(user.login.uuid)) {
+            onCheckChange(user) {
+                if (!this.checkedUsers.hasOwnProperty(user.login.uuid)) {
                     this.$set(this.checkedUsers, `${user.login.uuid}`, user)
-                } else if (event.target.checked === false && this.checkedUsers.hasOwnProperty(user.login.uuid)) {
+                } else {
                     this.$delete(this.checkedUsers, `${user.login.uuid}`)
                 }
             }

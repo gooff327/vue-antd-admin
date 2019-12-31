@@ -53,6 +53,21 @@
                 collapsed: false,
             }
         },
+        mounted() {
+            this.initUsers();
+
+        },
+        methods: {
+            async initUsers () {
+                const temp = JSON.parse(localStorage.getItem('users'));
+                if (temp !== null) {
+                    await this.$store.dispatch('initUsers', temp)
+                } else {
+                    const [res,err] = await this.api.permission.fetchUserList({results: 20}).then(result => [result, null]).catch(e => [null, e]);
+                    err ? new Error('fetch user list error, check your network connection') : this.$store.dispatch('initUsers', res.data.results);
+                }
+            }
+        }
     }
 </script>
 

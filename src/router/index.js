@@ -24,6 +24,7 @@ export const staticRoutes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   }
 ];
+console.log(staticRoutes)
 
 const createRouter = () => new VueRouter({
   // mode: 'history',
@@ -39,5 +40,4 @@ const createRouter = () => new VueRouter({
 
 const router = createRouter();
 export default router
-
 
