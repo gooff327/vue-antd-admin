@@ -1,13 +1,22 @@
 <template>
-    <draggable v-model="tableData" group="people" @start="drag=true" @end="drag=false">
+    <section>
+        <div class="toolbar">
+            <strong>Bordered <a-switch defaultChecked @change="bordered = !bordered"/></strong>
+            <strong>Loading <a-switch @change="loading = !loading"/></strong>
+            <strong>Header <a-switch @change="columnHeader = !columnHeader"/></strong>
+            <strong>Footer <a-switch @change="footer = !footer"/></strong>
+        </div>
+        <br>
         <a-table
-            :columns="columns"
-            :rowKey="record => record.login.uuid"
-            :dataSource="tableData"
-            bordered
-            :pagination="pagination"
-            :loading="loading"
-            @change="handleTableChange"
+                v-sortable="{onUpdate: onUpdate}"
+                :showHeader ="columnHeader"
+                :columns="columns"
+                :rowKey="record => record.login.uuid"
+                :dataSource="tableData"
+                :bordered="bordered"
+                :pagination="pagination"
+                :loading="loading"
+                @change="handleTableChange"
         >
             <template slot="name" slot-scope="name">
                 {{name.first}} {{name.last}}
@@ -21,8 +30,11 @@
             <template slot="state" slot-scope="location">
                 {{location.state}}
             </template>
+            <template v-if="footer" slot="footer">
+                Footer
+            </template>
         </a-table>
-    </draggable>
+    </section>
 </template>
 
 <script>
@@ -30,7 +42,11 @@
         name: "Users",
         data () {
             return {
+
+                columnHeader: true,
                 drag: false,
+                bordered: true,
+                footer: false,
                 columns : [
                     {
                         title: 'Name',
@@ -90,6 +106,10 @@
             this.fetch();
         },
         methods: {
+            onUpdate (event) {
+                this.tableData.splice(event.newIndex, 0, this.tableData.splice(event.oldIndex, 1)[0])
+
+            },
             handleTableChange(pagination, filters, sorter) {
                 console.log(pagination);
                 const pager = { ...this.pagination };
@@ -116,6 +136,9 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+    .toolbar
+        & > strong
+            margin 4px 10px
 
 </style>

@@ -4,7 +4,7 @@ const layout = {
             {
                 name: 'Dashboard',
                 path: '/dashboard',
-                component: () => import('@/views/Dashboard'),
+                component: () => import('@/views/Dashboard/index'),
                 meta: {
                     icon: 'dashboard',
                     role: [1, 2, 3, 4, 5, 6]
@@ -13,7 +13,7 @@ const layout = {
             {
                 name: 'Table',
                 path: '/table',
-                component: () => import('@/views/Table'),
+                component: () => import('@/views/Table/index'),
                 meta: {
                     icon: 'table',
                     role: [1, 2, 3, 4, 5, 6]
@@ -22,7 +22,7 @@ const layout = {
                     {
                         name: 'Users',
                         path: 'users',
-                        component: () => import('@/views/Users'),
+                        component: () => import('@/views/Table/Users'),
                         meta: {
                             icon: 'idcard',
                             role: [1, 2, 3, 4, 5, 6]
@@ -33,7 +33,7 @@ const layout = {
             {
                 name: 'Tool',
                 path: '/tool',
-                component: () => import('@/views/Tool'),
+                component: () => import('@/views/Tool/index'),
                 meta: {
                     icon: 'tool',
                     role: [1, 2, 3, 4, 5, 6]
@@ -42,7 +42,7 @@ const layout = {
                     {
                     name: 'Notes',
                     path: 'notes',
-                    component: () => import('@/views/Notes'),
+                    component: () => import('@/views/Tool/Notes'),
                     meta: {
                         icon: 'book',
                         role: [1, 2, 3, 4, 5, 6]
@@ -53,7 +53,7 @@ const layout = {
             {
                 name: 'Permission',
                 path: '/permission',
-                component: () => import('@/views/Permission'),
+                component: () => import('@/views/Permission/index'),
                 meta: {
                     icon: 'team',
                     role: [1, 2, 3, 4, 5, 6]
