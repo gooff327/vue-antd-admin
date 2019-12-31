@@ -106,7 +106,6 @@
         },
         methods: {
             handleTableChange(pagination, filters, sorter) {
-                console.log(pagination);
                 const pager = { ...this.pagination };
                 pager.current = pagination.current;
                 this.pagination = pager;
@@ -135,5 +134,6 @@
     .toolbar
         & > strong
             margin 4px 10px
-
+            .ant-switch
+                margin 0 4px
 </style>
