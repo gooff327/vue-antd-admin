@@ -7,9 +7,7 @@ import 'ant-design-vue/dist/antd.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import './request'
-import Sortable from 'vue-sortable'
 
-Vue.use(Sortable);
 Vue.use(Antd);
 Vue.prototype.$nprogress = NProgress;
 

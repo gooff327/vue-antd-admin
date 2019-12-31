@@ -8,7 +8,6 @@
         </div>
         <br>
         <a-table
-                v-sortable="{onUpdate: onUpdate}"
                 :showHeader ="columnHeader"
                 :columns="columns"
                 :rowKey="record => record.login.uuid"
@@ -106,10 +105,6 @@
             this.fetch();
         },
         methods: {
-            onUpdate (event) {
-                this.tableData.splice(event.newIndex, 0, this.tableData.splice(event.oldIndex, 1)[0])
-
-            },
             handleTableChange(pagination, filters, sorter) {
                 console.log(pagination);
                 const pager = { ...this.pagination };
