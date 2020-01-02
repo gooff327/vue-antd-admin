@@ -7,8 +7,10 @@ import 'ant-design-vue/dist/antd.css'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import './request'
+import Draggable from 'vuedraggable'
 
 Vue.use(Antd);
+Vue.component('VueDraggable', Draggable);
 Vue.prototype.$nprogress = NProgress;
 
 router.beforeEach((to, from, next) => {

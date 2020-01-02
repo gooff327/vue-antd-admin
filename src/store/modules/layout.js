@@ -47,6 +47,15 @@ const layout = {
                         icon: 'book',
                         role: [1, 2, 3, 4, 5, 6]
                     },
+                },
+                {
+                    name: 'Board',
+                    path: 'Board',
+                    component: () => import('@/views/Tool/Board'),
+                    meta: {
+                        icon: 'project',
+                        role: [1, 2, 3, 4, 5, 6]
+                    },
                 }
                 ]
             },

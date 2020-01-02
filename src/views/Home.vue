@@ -24,7 +24,16 @@
                         <span>{{item.name}}</span>
                     </a-breadcrumb-item>
                 </a-breadcrumb>
-                <a-avatar class="avatar" icon="user" style="backgroundColor:#87d068"/>
+
+                <div class="header-right-wrapper">
+                    <a-badge dot>
+                        <a-icon type="message"/>
+                    </a-badge>
+                    <a-badge dot>
+                        <a-icon type="notification" />
+                    </a-badge>
+                    <a-avatar class="avatar" icon="user" style="backgroundColor:#87d068"/>
+                </div>
 
 
             </a-layout-header>
@@ -71,7 +80,18 @@
     }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
+
+    @keyframes scale_animate
+        0%
+            transform scale(1)
+        20%
+            transform scale(0.8)
+        70%
+            transform scale(1.6)
+        100%
+            transform scale(1)
+
     #components-layout-demo-custom-trigger .trigger {
         font-size: 18px;
         line-height: 64px;
@@ -101,11 +121,21 @@
         line-height 64px !important
         width 80%
 
-    .avatar
+    .header-right-wrapper
         position absolute !important
         right 0
         top 0
-        transform translate(-16px,16px)
+        .avatar
+            margin-right 20px
+        & > .ant-badge
+            margin-right 20px
+            &:hover
+                animation scale_animate .5s
+                animation-timing-function: cubic-bezier(0.1, -0.6, 0.2, 0);
+            .anticon:hover
+                color #42b983
+                cursor pointer
+
 
     .component-fade-enter-active, .component-fade-leave-active
         transition: opacity .3s ease;
