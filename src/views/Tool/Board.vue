@@ -87,6 +87,10 @@
         },
         methods: {
             addItem () {
+                if (this.item.content === ''){
+                    this.$message.error('Please submit valid content');
+                    return
+                }
                 this.dataOnHold.push(Object.assign({}, this.item));
                 this.$message.success(`Add item success!`);
                 this.$set(this.item, 'content', '');
