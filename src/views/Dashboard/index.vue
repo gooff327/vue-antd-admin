@@ -106,8 +106,8 @@
                 chart.options.scales.xAxes[0].ticks.min = head.x;
             },
             generateData (chart) {
-                const type = chart.config.type
-                chart.timer = setInterval(() => {
+                const type = chart.config.type;
+                const fn = function () {
                     let head = chart.data.datasets[0].data;
 
                     if (type === 'pie' || type === 'radar') {
@@ -129,7 +129,9 @@
                         this.updateScale(chart, head[0]);
                     }
                     chart.update();
-                }, 3000);
+                }.bind(this);
+                fn();
+                chart.timer = setInterval(fn, 2000);
             },
             initChart (ref, type = 'line', config = {}) {
                 const salesData = {

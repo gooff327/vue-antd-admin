@@ -7,9 +7,11 @@
                 <a-alert message="ON HOLD" type="error" />
                 <div class="b-content">
                     <vue-draggable class="list-group" v-bind="dragProps" v-model="dataOnHold" :move="onMove">
-                        <li class="content" v-for="(item,index) of dataOnHold" :key="index">
-                            <p>{{item.content}}</p>
-                        </li>
+                        <transition-group name="list">
+                            <li class="content" v-for="(item,index) of dataOnHold" :key="index">
+                                <p>{{item.content}}</p>
+                            </li>
+                        </transition-group>
                     </vue-draggable>
                 </div>
             </a-col>
@@ -34,11 +36,18 @@
                 </div>
             </a-col>
         </a-row>
-        <a-tooltip placement="right" trigger="hover">
+        <a-tooltip :visible="!visible" placement="right">
             <template slot="title">
                 Add Item
             </template>
-            <a-button size="large" type="primary" icon="plus" class="add-button" shape="circle"/>
+            <a-popover title="Add Item" trigger="click" v-model="visible">
+                <template slot="content">
+                    <a-input-search placeholder="Insert your task" @search="addItem" v-model="item.content">
+                        <a-button @click="addItem" @keydown.enter="addItem" icon="check" size="small" slot="enterButton"/>
+                    </a-input-search>
+                </template>
+                <a-button size="large" type="primary" icon="plus" class="add-button" shape="circle"/>
+            </a-popover>
         </a-tooltip>
     </section>
 </template>
@@ -48,23 +57,26 @@
         name: "Board",
         data () {
             return {
+                item: {
+                    content: ''
+                },
                 dataOnHold: [
                     {
-                        content: 'test1',
+                        content: '提交所有代码',
                     },
                     {
-                        content: 'test2',
+                        content: '整理学习笔记',
                     },
                     {
-                        content: 'test3',
+                        content: '好好吃饭',
                     },
                 ],
+                visible: false,
                 dataInProgress: [],
                 dataDone: [],
                 dragProps: {
-                    animation: 0,
+                    animation: 300,
                     group: "description",
-                    ghostClass: "ghost"
                 }
             }
         },
@@ -74,6 +86,11 @@
           }
         },
         methods: {
+            addItem () {
+                this.dataOnHold.push(Object.assign({}, this.item));
+                this.$message.success(`Add item success!`);
+                this.$set(this.item, 'content', '');
+            },
             onMove({ relatedContext, draggedContext }) {
                 const relatedElement = relatedContext.element;
                 const draggedElement = draggedContext.element;
@@ -87,22 +104,37 @@
 
 <style lang="stylus" scoped>
     .board-wrapper
+        .list-enter-active, .list-leave-active
+            transition all .3s
+        .list-enter, .list-leave-to
+            opacity 0
+            transform translateY(30px)
         .b-content
             padding-bottom 6px
-            background-color #ddd
+            background-color rgba(221,221,221,0.25)
             border-bottom-left-radius 8px
             border-bottom-right-radius 8px
+            .list-group
+                min-height 60vh
+                width 100%
+                padding 10px
+                overflow scroll
+                overflow: -moz-scrollbars-none;
+                -ms-overflow-style: none;
+                &::-webkit-scrollbar
+                    width 0 !important
             .content
                 display block
                 background-color white
                 border 1px solid #ddd
-                margin-top -1px
+                margin-bottom 10px
                 cursor move
+                border-radius 6px
                 p
                     padding 10px 0
                     margin  0
         .add-button
             position fixed
             bottom 100px
-            right 140px
+            right 180px
 </style>

@@ -5,9 +5,11 @@
             <strong>Loading <a-switch @change="loading = !loading"/></strong>
             <strong>Header <a-switch @change="columnHeader = !columnHeader"/></strong>
             <strong>Footer <a-switch @change="footer = !footer"/></strong>
+            <a-button :disabled="selectedRowKeys.length < 1" icon="delete" type="danger" @click="confirmDelete"/>
         </div>
         <br>
         <a-table
+                :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
                 :showHeader ="columnHeader"
                 :columns="columns"
                 :rowKey="record => record.login.uuid"
@@ -19,15 +21,6 @@
         >
             <template slot="name" slot-scope="name">
                 {{name.first}} {{name.last}}
-            </template>
-            <template slot="dob" slot-scope="dob">
-                {{dob.age}}
-            </template>
-            <template slot="city" slot-scope="location">
-                {{location.city}}
-            </template>
-            <template slot="state" slot-scope="location">
-                {{location.state}}
             </template>
             <template v-if="footer" slot="footer">
                 Footer
@@ -63,19 +56,15 @@
                         children: [
                             {
                                 title: 'City',
-                                dataIndex: 'location',
+                                dataIndex: 'location.city',
                                 key: 'city',
                                 width: 200,
-                                scopedSlots: { customRender: 'city' },
-
                             },
                             {
                                 title: 'State',
-                                dataIndex: 'location',
+                                dataIndex: 'location.state',
                                 key: 'state',
                                 width: 200,
-                                scopedSlots: { customRender: 'state' },
-
                             },
                         ],
                     },
@@ -85,15 +74,14 @@
                     },
                     {
                         title: 'Age',
-                        dataIndex: 'dob',
-                        scopedSlots: { customRender: 'dob' },
-
+                        dataIndex: 'dob.age',
                     },
                     {
                         title: 'Phone',
                         dataIndex: 'phone'
-                    },
+                    }
                 ],
+                selectedRowKeys: [],
                 tableData: [],
                 pagination: {
                     total: 200
@@ -105,6 +93,31 @@
             this.fetch();
         },
         methods: {
+            onSelectChange (keys) {
+                this.selectedRowKeys = keys
+            },
+            confirmDelete () {
+              this.$confirm({
+                  title: 'Delete Selected items ?',
+                  onOk: this.handleDelete,
+              })
+            },
+            handleDelete () {
+                const all = this.selectedRowKeys.length;
+                let [ success, failure ] = [ 0, 0];
+
+                while(this.selectedRowKeys.length > 0) {
+                    const index = this.tableData.findIndex(item => item.login.uuid === this.selectedRowKeys[0]);
+                    if (index >= 0) {
+                       this.tableData.splice(index, 1);
+                       success ++
+                    } else {
+                        failure ++
+                    }
+                    this.selectedRowKeys.shift()
+               }
+               this.$message.success(`All: ${all}   Success: ${success}  Failed: ${failure}`)
+            },
             handleTableChange(pagination, filters, sorter) {
                 const pager = { ...this.pagination };
                 pager.current = pagination.current;
