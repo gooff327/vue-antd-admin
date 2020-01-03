@@ -46,7 +46,7 @@
                         },
                         on: {
                             click: () => {
-                                if (context.$route.path !== menu.path) {
+                                if (context.$route.name !== menu.name) {
                                     context.$router.push({name: menu.name})
                                 }
                             }
