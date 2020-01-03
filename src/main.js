@@ -8,8 +8,11 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import './request'
 import Draggable from 'vuedraggable'
+import {VueMasonryPlugin} from 'vue-masonry';
+
 
 Vue.use(Antd);
+Vue.use(VueMasonryPlugin)
 Vue.component('VueDraggable', Draggable);
 Vue.prototype.$nprogress = NProgress;
 

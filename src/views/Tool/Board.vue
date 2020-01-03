@@ -7,11 +7,10 @@
                 <a-alert message="ON HOLD" type="error" />
                 <div class="b-content">
                     <vue-draggable class="list-group" v-bind="dragProps" v-model="dataOnHold" :move="onMove">
-                        <transition-group name="list">
-                            <li class="content" v-for="(item,index) of dataOnHold" :key="index">
-                                <p>{{item.content}}</p>
-                            </li>
-                        </transition-group>
+                        <li @mouseout="clearDelete" @mouseover="handleClick('onHold', index)" class="content" v-for="(item,index) of dataOnHold" :key="index">
+                            <p>{{item.content}}</p>
+                            <a-icon @click="deleteItem('dataOnHold', index)" :class="showDelete['onHold'][index] === true? 'show delete-icon' : 'hide delete-icon'" type="delete"/>
+                        </li>
                     </vue-draggable>
                 </div>
             </a-col>
@@ -19,8 +18,9 @@
                 <a-alert message="IN PROGRESS" type="info" />
                 <div class="b-content">
                     <vue-draggable class="list-group" v-bind="dragProps" v-model="dataInProgress" :move="onMove">
-                        <li class="content" v-for="(item,index) of dataInProgress" :key="index">
+                        <li @mouseout="clearDelete" @mouseover="handleClick('inProgress', index)" class="content" v-for="(item,index) of dataInProgress" :key="index">
                             <p>{{item.content}}</p>
+                            <a-icon @click="deleteItem('dataInProgress', index)" :class="showDelete['inProgress'][index] === true? 'show delete-icon' : 'hide delete-icon'" type="delete"/>
                         </li>
                     </vue-draggable>
                 </div>
@@ -29,8 +29,9 @@
                 <a-alert message="DONE" type="success" />
                 <div class="b-content">
                     <vue-draggable class="list-group" v-bind="dragProps" v-model="dataDone" :move="onMove">
-                        <li class="content" v-for="(item,index) of dataDone" :key="index">
+                        <li @mouseout="clearDelete" @mouseover="handleClick('done', index)" class="content" v-for="(item,index) of dataDone" :key="index">
                             <p>{{item.content}}</p>
+                            <a-icon @click="deleteItem('dataDone', index)" :class="showDelete['done'][index] === true? 'show delete-icon' : 'hide delete-icon'" type="delete"/>
                         </li>
                     </vue-draggable>
                 </div>
@@ -57,6 +58,11 @@
         name: "Board",
         data () {
             return {
+                showDelete: {
+                    onHold: {
+
+                    }
+                },
                 item: {
                     content: ''
                 },
@@ -86,6 +92,16 @@
           }
         },
         methods: {
+            handleClick(kind, index) {
+                this.showDelete = Object.assign({}, this.showDelete, {onHold: {}, inProgress: {}, done: {}}, {[kind]: {[index]: true}});
+            },
+            clearDelete () {
+                this.showDelete = Object.assign({}, this.showDelete, {onHold: {}, inProgress: {}, done: {}});
+            },
+            deleteItem (data, index) {
+                this[data].splice(index, 1);
+                this.$message.success('Item deleted!');
+            },
             addItem () {
                 if (this.item.content === ''){
                     this.$message.error('Please submit valid content');
@@ -108,7 +124,10 @@
 
 <style lang="stylus" scoped>
     .board-wrapper
-        .list-enter-active, .list-leave-active
+        .list-leave-active
+            display:none!important;
+
+        .list-enter-active
             transition all .3s
         .list-enter, .list-leave-to
             opacity 0
@@ -128,6 +147,7 @@
                 &::-webkit-scrollbar
                     width 0 !important
             .content
+                position relative
                 display block
                 background-color white
                 border 1px solid #ddd
@@ -141,4 +161,23 @@
             position fixed
             bottom 100px
             right 180px
+        .delete-icon
+            position absolute
+            color #f5222d
+            right 15px
+            top 12px
+            width 20px
+            height 20px
+            font-size 16px
+            display inline-block
+            cursor pointer
+            transition .3s
+        .show
+            visibility visible
+            opacity 1
+            transform scale(1.2)
+        .hide
+            visibility hidden
+            opacity 0
+            transform scale(0.2)
 </style>
