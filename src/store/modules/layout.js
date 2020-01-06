@@ -31,6 +31,35 @@ const layout = {
                 ]
             },
             {
+                name: 'Article',
+                path: '/article',
+                component: () => import('@/views/Article/index'),
+                meta: {
+                    icon: 'file-markdown',
+                    role: [1, 2, 3, 4, 5, 6]
+                },
+                children: [
+                    {
+                        name: 'Posts',
+                        path: 'posts',
+                        component: () => import('@/views/Article/Posts'),
+                        meta: {
+                            icon: 'file-protect',
+                            role: [1, 2, 3, 4, 5, 6]
+                        },
+                    },
+                    {
+                        name: 'Editor',
+                        path: 'editor',
+                        component: () => import('@/views/Article/Editor'),
+                        meta: {
+                            icon: 'edit',
+                            role: [1, 2, 3, 4, 5, 6]
+                        },
+                    }
+                ]
+            },
+            {
                 name: 'Tool',
                 path: '/tool',
                 component: () => import('@/views/Tool/index'),
@@ -50,13 +79,13 @@ const layout = {
                 },
                 {
                     name: 'Board',
-                    path: 'Board',
+                    path: 'board',
                     component: () => import('@/views/Tool/Board'),
                     meta: {
                         icon: 'project',
                         role: [1, 2, 3, 4, 5, 6]
                     },
-                }
+                },
                 ]
             },
             {

@@ -17,6 +17,8 @@ const user = {
     actions: {
         initUsers: ({commit}, users) => {
             commit('SET_USERS', users);
+        },
+        saveUsers: ({commit}) => {
             commit('SAVE_TO_LOCAL')
         }
     }

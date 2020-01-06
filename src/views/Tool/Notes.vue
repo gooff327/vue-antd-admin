@@ -101,7 +101,7 @@
             },
             deleteItem(index) {
                 this.notes.splice(index, 1)
-            }
+            },
         }
     }
 </script>
@@ -128,7 +128,6 @@
                 padding-bottom 6px
                 font-weight bold
                 font-size 18px
-                font "Special Elite", cursive
                 border-bottom 2px dashed rgba(32,43,51,0.64)
                 width: 100%;
                 overflow: hidden;
@@ -139,6 +138,7 @@
                     border 0
             &__content
                 font-size 16px
+                font-family "Comic Sans MS"
                 color rgba(32,43,51,0.64)
                 .ant-input
                     border 0

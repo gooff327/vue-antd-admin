@@ -64,7 +64,7 @@
         },
         mounted() {
             this.initUsers();
-
+            this.initArticle();
         },
         methods: {
             async initUsers () {
@@ -73,8 +73,18 @@
                     await this.$store.dispatch('initUsers', temp)
                 } else {
                     const [res,err] = await this.api.permission.fetchUserList({results: 50}).then(result => [result, null]).catch(e => [null, e]);
-                    err ? new Error('fetch user list error, check your network connection') : this.$store.dispatch('initUsers', res.data.results);
+                    if (err !== null) {
+                        new Error('fetch user list error, check your network connection')
+                    } else {
+                        await this.$store.dispatch('initUsers', res.data.results);
+                        await this.$store.dispatch('saveUsers');
+                    }
                 }
+            },
+            initArticle () {
+                const posts = JSON.parse(localStorage.getItem('posts'));
+                const draft = JSON.parse(localStorage.getItem('draft'));
+                this.$store.dispatch('initArticle', {posts, draft})
             }
         }
     }
