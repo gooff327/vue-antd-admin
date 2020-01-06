@@ -1,7 +1,6 @@
 <template>
     <section class="board-wrapper">
         <h1>Board</h1>
-        <a-progress type="line" :percent="percent"/>
         <a-row :gutter="20">
             <a-col :span="8" class="board">
                 <a-alert message="ON HOLD" type="error" />
@@ -37,6 +36,8 @@
                 </div>
             </a-col>
         </a-row>
+        <a-progress type="line" :percent="percent"/>
+
         <a-tooltip :visible="!visible" placement="right">
             <template slot="title">
                 Add Item
@@ -124,9 +125,11 @@
 
 <style lang="stylus" scoped>
     .board-wrapper
+        h1
+            font-family "Comic Sans MS"
+            color lightcoral
         .list-leave-active
             display:none!important;
-
         .list-enter-active
             transition all .3s
         .list-enter, .list-leave-to
