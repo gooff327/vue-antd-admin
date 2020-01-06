@@ -1,7 +1,7 @@
 <template>
     <section class="board-wrapper">
         <h1>Board</h1>
-        <a-row :gutter="20">
+        <a-row :gutter="40">
             <a-col :span="8" class="board">
                 <a-alert message="ON HOLD" type="error" />
                 <div class="b-content">
