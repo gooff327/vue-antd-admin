@@ -145,17 +145,22 @@
             .anticon:hover
                 color #42b983
                 cursor pointer
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
     .component-fade-enter-active, .component-fade-leave-active
         transition: opacity .3s ease;
-
     .component-fade-enter, .component-fade-leave-to
         opacity: 0
-
     .content
         margin 24px 16px
+<<<<<<< Updated upstream
         padding 24px
+=======
+        padding 0 !important
+>>>>>>> Stashed changes
         min-height 280px
         background-color #f0f2f5 !important
         overflow scroll
