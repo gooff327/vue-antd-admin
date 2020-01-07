@@ -12,7 +12,6 @@
         mounted() {
             console.log(this.$route);
             let { matched } = {...this.$route};
-            console.log(matched)
             if (matched.length > 2) {
                 matched = matched.slice(1,-1);
                 this.openKeys.push(...matched.map(item => item.name))
@@ -65,7 +64,8 @@
                     props: {
                         theme:"dark",
                         mode:"inline",
-                        defaultSelectedKeys: [`${this.$route.name}`],
+                        selectedKeys: [`${this.$route.name}`],
+                        defaultSelectedKeys: ['Dashboard'],
                         openKeys: this.openKeys
                     }
                 },
