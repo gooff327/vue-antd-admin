@@ -72,9 +72,9 @@
             font-family "Comic Sans MS"
             color lightcoral
         .items-wrapper
-            min-height 56.25vh
-            height 56.25vh
-
+            min-height 70.25vh
+            height 70.25vh
+            margin-bottom 20px
             .toolbar
                 position absolute
                 right 10%
