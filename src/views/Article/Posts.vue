@@ -35,7 +35,7 @@
             },
             handleEdit (index) {
                 this.$store.dispatch("beforeEdit", index);
-                this.$router.push({name: 'editor'});
+                this.$router.push({name: 'Editor'});
             },
             handleDelete (index) {
                 this.$store.dispatch("updatePosts", {action: 'delete', index: index})
