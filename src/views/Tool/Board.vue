@@ -1,8 +1,8 @@
 <template>
     <section class="board-wrapper">
         <h1>Board</h1>
-        <a-row :gutter="40">
-            <a-col :span="8" class="board">
+        <a-row>
+            <a-col :span="6" :offset="2" class="board">
                 <a-alert message="ON HOLD" type="error" />
                 <div class="b-content">
                     <vue-draggable class="list-group" v-bind="dragProps" v-model="dataOnHold" :move="onMove">
@@ -13,7 +13,7 @@
                     </vue-draggable>
                 </div>
             </a-col>
-            <a-col :span="8" class="board">
+            <a-col :span="6" :offset="1" class="board">
                 <a-alert message="IN PROGRESS" type="info" />
                 <div class="b-content">
                     <vue-draggable class="list-group" v-bind="dragProps" v-model="dataInProgress" :move="onMove">
@@ -24,7 +24,7 @@
                     </vue-draggable>
                 </div>
             </a-col>
-            <a-col :span="8" class="board">
+            <a-col :span="6" :offset="1" class="board">
                 <a-alert message="DONE" type="success" />
                 <div class="b-content">
                     <vue-draggable class="list-group" v-bind="dragProps" v-model="dataDone" :move="onMove">
@@ -36,6 +36,7 @@
                 </div>
             </a-col>
         </a-row>
+        <br>
         <a-progress type="line" :percent="percent"/>
 
         <a-tooltip :visible="!visible" placement="right">
@@ -64,6 +65,7 @@
 
                     }
                 },
+                temp: {},
                 item: {
                     content: ''
                 },
@@ -100,8 +102,11 @@
                 this.showDelete = Object.assign({}, this.showDelete, {onHold: {}, inProgress: {}, done: {}});
             },
             deleteItem (data, index) {
-                this[data].splice(index, 1);
-                this.$message.success('Item deleted!');
+                this.temp = this[data].splice(index, 1);
+                this.$message.success((h) => h('span',['Item removed! ', h('a', {on: {click: () => {
+                    this[data].splice(index, 0, ...this.temp);
+                    this.temp = null;
+                    }}}, 'undo')]), 2);
             },
             addItem () {
                 if (this.item.content === ''){
@@ -136,8 +141,8 @@
             opacity 0
             transform translateY(30px)
         .b-content
-            padding-bottom 6px
-            background-color rgba(221,221,221,0.25)
+            padding 6px
+            background-color #fff
             border-bottom-left-radius 8px
             border-bottom-right-radius 8px
             .list-group
@@ -162,7 +167,7 @@
                     margin  0
         .add-button
             position fixed
-            bottom 100px
+            bottom 60px
             right 180px
         .delete-icon
             position absolute

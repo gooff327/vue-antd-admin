@@ -74,6 +74,7 @@
         .items-wrapper
             min-height 56.25vh
             height 56.25vh
+
             .toolbar
                 position absolute
                 right 10%
@@ -82,4 +83,5 @@
             #editor
                 min-height 100%
                 height 100%
+
 </style>

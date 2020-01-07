@@ -156,9 +156,13 @@
     .content
         margin 24px 16px
         padding 24px
-        background rgb(255, 255, 255)
         min-height 280px
+        background-color #f0f2f5 !important
         overflow scroll
+        overflow: -moz-scrollbars-none;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar
+            width 0 !important
     .progress
         position fixed
         top 64px

@@ -120,6 +120,7 @@
             width 300px
             margin 10px
             padding 10px 10px
+            background-color #fff
             border-radius 4px
             border 2px solid #41bb83;
             box-shadow 3px 3px 0 0 rgba(95, 158, 160, 0.55)

@@ -1,7 +1,7 @@
 <template>
     <section class="dashboard-wrapper">
-        <a-row :gutter="20">
-            <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
+        <a-row>
+            <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <a-tooltip title="Stars of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="star" type="star"/>
@@ -9,7 +9,7 @@
                     </div>
                 </a-tooltip>
             </a-col>
-            <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
+            <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <a-tooltip title="Watch count of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="eye" type="eye"/>
@@ -17,7 +17,7 @@
                     </div>
                 </a-tooltip>
             </a-col>
-            <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
+            <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <a-tooltip title="Forks of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="save" type="save"/>
@@ -25,7 +25,7 @@
                     </div>
                 </a-tooltip>
             </a-col>
-            <a-col :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
+            <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <a-tooltip title="Issues of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="message" type="message"/>
@@ -34,24 +34,23 @@
                 </a-tooltip>
             </a-col>
         </a-row>
-        <br>
         <a-row>
-            <a-col :span="24">
-                <canvas style="position: relative; height:60vh; width:95%" ref="lineChart"/>
+            <a-col class="wrapper" :span="24">
+                <canvas class="line-chart" style="position: relative; height:60vh; width:95%" ref="lineChart"/>
             </a-col>
         </a-row>
         <a-row>
-            <a-col :span="6">
-                <canvas style="position: relative; height:40vh; width:95%" ref="barChart"/>
+            <a-col class="wrapper" :span="6">
+                <canvas class="bar-chart" style="position: relative; height:40vh; width:95%" ref="barChart"/>
             </a-col>
-            <a-col :span="6">
-                <canvas style="position: relative; height:40vh; width:95%" ref="bubbleChart"/>
+            <a-col class="wrapper" :span="6">
+                <canvas class="bubble-chart" style="position: relative; height:40vh; width:95%" ref="bubbleChart"/>
             </a-col>
-            <a-col :span="6">
-                <canvas style="position: relative; height:40vh; width:95%" ref="pieChart"/>
+            <a-col class="wrapper" :span="6">
+                <canvas class="pie-chart" style="position: relative; height:40vh; width:95%" ref="pieChart"/>
             </a-col>
-            <a-col :span="6">
-                <canvas style="position: relative; height:40vh; width:95%" ref="radarChart"/>
+            <a-col class="wrapper" :span="6">
+                <canvas class="radar-chart" style="position: relative; height:40vh; width:95%" ref="radarChart"/>
             </a-col>
         </a-row>
 
@@ -237,10 +236,15 @@
 
     .dashboard-wrapper
         position: relative;
+        .wrapper
+            background-color #fff
+            padding 10px
+            border 4px solid #f0f2f5
+            border-radius 8px
         .block-wrapper
             height 200px
             line-height 200px
-            background-color rgba(0,0,0,0.05)
+            background-color #fff
             padding-left 25%
             padding-right 25%
             border-radius 6px

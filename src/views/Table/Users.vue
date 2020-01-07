@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="table-wrapper">
         <div class="toolbar">
             <strong>Bordered <a-switch defaultChecked @change="bordered = !bordered"/></strong>
             <strong>Loading <a-switch @change="loading = !loading"/></strong>
@@ -143,9 +143,13 @@
 </script>
 
 <style scoped lang="stylus">
-    .toolbar
-        & > strong
-            margin 4px 10px
-            .ant-switch
-                margin 0 4px
+    .table-wrapper
+        background-color #fff
+        border-radius 6px
+        padding 10px
+        .toolbar
+            & > strong
+                margin 4px 10px
+                .ant-switch
+                    margin 0 4px
 </style>
