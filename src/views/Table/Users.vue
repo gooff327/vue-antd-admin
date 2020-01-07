@@ -58,13 +58,11 @@
                                 title: 'City',
                                 dataIndex: 'location.city',
                                 key: 'city',
-                                width: 200,
                             },
                             {
                                 title: 'State',
                                 dataIndex: 'location.state',
                                 key: 'state',
-                                width: 200,
                             },
                         ],
                     },
@@ -119,6 +117,7 @@
                this.$message.success(`All: ${all}   Success: ${success}  Failed: ${failure}`)
             },
             handleTableChange(pagination, filters, sorter) {
+                this.loading = true;
                 const pager = { ...this.pagination };
                 pager.current = pagination.current;
                 this.pagination = pager;
