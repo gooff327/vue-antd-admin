@@ -22,7 +22,7 @@
                 this.$refs['editor'].$el.style.zIndex = 0;
                 if (this.editCursor !== -1) {
                     this.$store.dispatch('updatePosts', {action: 'update', post: this.draft});
-                    this.$message.success((h) => h('span',['Article updated! ', h('a', {on: {click: () => this.$router.back()}}, 'back')]));
+                    this.$message.success((h) => h('span',['Article updated! ', h('a', {on: {click: () => this.$router.push({name: 'Posts'})}}, 'back')]), 2);
                     return
                 }
                 this.$confirm({
@@ -31,11 +31,11 @@
                     cancelText: 'save as draft',
                     onOk: () =>  {
                         this.$store.dispatch('updatePosts', {action: 'new', post: this.draft});
-                        this.$message.success((h) => h('span',['Article posted! ', h('a', {on: {click: () => this.$router.push({name: 'Posts'})}}, 'view')]));
+                        this.$message.success((h) => h('span',['Article posted! ', h('a', {on: {click: () => this.$router.push({name: 'Posts'})}}, 'view')]),2);
                     },
                     onCancel: () => {
                         this.$store.dispatch("updateDraft", {action: 'update', draft: this.draft});
-                        this.$message.success('Draft saved!')
+                        this.$message.success('Draft saved!', 2)
                     }
                 });
             }

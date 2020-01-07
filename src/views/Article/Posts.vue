@@ -2,13 +2,13 @@
 <section class="posts-wrapper">
     <h1>Posts</h1>
     <a-row :gutter="40">
-        <a-col @mouseenter="handleEnter(index)" @mouseleave="handleLeave(index)" class="items-wrapper" :span="6" v-for="(item, index) of $store.getters.posts" :key="index">
+        <a-col ref="wrapper" @mouseenter="handleEnter(index)" @mouseleave="handleLeave(index)" class="items-wrapper" :span="6" v-for="(item, index) of $store.getters.posts" :key="index">
             <transition name="slide-fade">
                 <div v-if="toolbarVisible[index]" class="toolbar">
                     <a-button-group>
                         <a-button @click="handleEdit(index)" icon="edit" type="info"/>
                         <a-button @click="handleDelete(index)" icon="delete" type="danger"/>
-                        <a-button @click="handleFullScreen(index)" icon="fullscreen" type="info"/>
+                        <a-button @click="handleFullScreen(index)" :icon="fullscreenState ? 'fullscreen-exit' : 'fullscreen'" type="info"/>
                     </a-button-group>
                 </div>
             </transition>
@@ -24,7 +24,14 @@
         data () {
             return {
                 toolbarVisible: {},
+                fullscreenState: false,
             }
+        },
+        async mounted() {
+            await this.$nextTick();
+            document.addEventListener('fullscreenchange', () => {
+                this.fullscreenState = !this.fullscreenState
+            }, false);
         },
         methods: {
             handleEnter (index) {
@@ -41,7 +48,12 @@
                 this.$store.dispatch("updatePosts", {action: 'delete', index: index})
             },
             handleFullScreen(index) {
-                console.log(index)
+                if (!this.fullscreenState){
+                    this.$refs['wrapper'][index].$el.requestFullscreen();
+                }
+                else {
+                    document.exitFullscreen();
+                }
             }
         }
     }
