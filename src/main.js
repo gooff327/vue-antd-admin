@@ -19,7 +19,6 @@ Vue.component('VueDraggable', Draggable);
 Vue.prototype.$nprogress = NProgress;
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
   if (to.matched.length > 0) {
     NProgress.start();
     next()
