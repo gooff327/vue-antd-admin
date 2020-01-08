@@ -1,6 +1,11 @@
 const user = {
     state: {
-        users: []
+        users: [],
+        self: {
+            role: 1,
+            avatar: '',
+            sex: 'male'
+        }
     },
     mutations: {
         SET_USERS: (state, users) => {

@@ -2,7 +2,8 @@
     export default {
         name: "MenuUtils",
         props: {
-            menus: { require: true }
+            menus: { require: true },
+            reorder: { default: false}
         },
         data () {
             return {
@@ -10,7 +11,6 @@
             }
         },
         mounted() {
-            console.log(this.$route);
             let { matched } = {...this.$route};
             if (matched.length > 2) {
                 matched = matched.slice(1,-1);

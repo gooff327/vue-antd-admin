@@ -41,7 +41,7 @@
             <a-button
                 v-show="current === steps.length - 1"
                 type="primary"
-                @click="$message.success('Congratulations! All your change have submitted')"
+                @click="submit"
             >
                 Done
             </a-button>
@@ -87,9 +87,26 @@
         methods: {
             next () {
                 this.current ++
+                if (this.current === 2) {
+                    console.log(this.checkedMenus)
+                }
             },
             prev () {
                 this.current --
+            },
+            submit () {
+                // this.$message.success('Congratulations! All your change have submitted')
+                const menus = this.$store.getters.menus;
+                const {role} = this.$store.getters.self;
+                menus.map(menu => {
+                    const index =  menu.meta.roles.indexOf(role);
+                    if (this.checkedMenus.includes(menu.name)) {
+                        index === -1 ? menu.meta.roles.push(role) : undefined
+                    } else {
+                        index !== -1 ? menu.meta.roles.splice(index, 1) : undefined
+                    }
+                });
+                this.$store.dispatch("changeMenus", menus)
             },
             onCheckChange(user) {
                 if (!this.checkedUsers.hasOwnProperty(user.login.uuid)) {

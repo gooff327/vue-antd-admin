@@ -239,7 +239,7 @@
         .wrapper
             background-color #fff
             padding 10px
-            border 4px solid #f0f2f5
+            border 6px solid #f0f2f5
             border-radius 8px
         .block-wrapper
             height 200px

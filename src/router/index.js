@@ -8,17 +8,22 @@ export const staticRoutes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
     redirect: '/dashboard',
-    children: store.getters.menus,
+    component: Home,
+    children: [],
     meta: {
       icon: 'home'
     }
+  },
+  {
+    path: '/error',
+    name: '404',
+    component: () => import('@/views/NotFound')
   }
 ];
 
-const createRouter = () => new VueRouter({
-  // mode: 'history',
+const createRouter = (routes) => new VueRouter({
+  mode: 'history',
   scrollBehavior: (to, from, savedPosition) => { // only available in HTML5 history mode
     if (savedPosition) {
       return savedPosition
@@ -26,9 +31,17 @@ const createRouter = () => new VueRouter({
       return {x: 0, y: 0}
     }
   },
-  routes: staticRoutes
+  routes: routes
 });
 
-const router = createRouter();
+store.dispatch("initMenus")
+staticRoutes[0].children = store.getters.menus;
+const router = createRouter(staticRoutes);
 export default router
 
+export function resetRouter() {
+  store.dispatch("initMenus")
+  staticRoutes[0].children = store.getters.menus;
+  const newRouter = createRouter(staticRoutes);
+  router.matcher = newRouter.matcher
+}

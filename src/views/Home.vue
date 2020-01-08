@@ -32,7 +32,10 @@
                     <a-badge dot>
                         <a-icon type="notification" />
                     </a-badge>
-                    <a-avatar class="avatar" icon="user" style="backgroundColor:#87d068"/>
+                    <a-popover trigger="click">
+                        <a @click="reset" slot="content">Reset Permission</a>
+                        <a-avatar class="avatar" icon="user" style="backgroundColor:#87d068"/>
+                    </a-popover>
                 </div>
 
 
@@ -85,6 +88,12 @@
                 const posts = JSON.parse(localStorage.getItem('posts'));
                 const draft = JSON.parse(localStorage.getItem('draft'));
                 this.$store.dispatch('initArticle', {posts, draft})
+            },
+            reset () {
+                localStorage.removeItem('menus');
+                this.$message.success('Reset permission success, reloading!');
+                this.$store.dispatch("initMenus");
+                window.location.reload()
             }
         }
     }

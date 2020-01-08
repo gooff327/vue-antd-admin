@@ -1,13 +1,39 @@
+import {resetRouter} from "../../router";
+import router from "../../router";
+function hasPermission(roles, route) {
+    if (route.meta && route.meta.roles) {
+        return route.meta.roles.includes(roles)
+    } else {
+        return true
+    }
+}
+
+function filterAsyncRoutes(routes, roles) {
+    const res = [];
+    routes.forEach(route => {
+        const tmp = {...route};
+
+        if (hasPermission(roles, tmp)) {
+            if (tmp.children) {
+                tmp.children = filterAsyncRoutes(tmp.children, roles)
+            }
+            res.push(tmp)
+        }
+    });
+
+    return res
+}
+
 const layout = {
     state: {
-        menus: [
+        base: [
             {
                 name: 'Dashboard',
                 path: '/dashboard',
                 component: () => import('@/views/Dashboard/index'),
                 meta: {
                     icon: 'dashboard',
-                    role: [1, 2, 3, 4, 5, 6]
+                    roles: [1, 2, 3, 4, 5, 6]
                 },
             },
             {
@@ -16,7 +42,7 @@ const layout = {
                 component: () => import('@/views/Table/index'),
                 meta: {
                     icon: 'table',
-                    role: [1, 2, 3, 4, 5, 6]
+                    roles: [1, 2, 3, 4, 5, 6]
                 },
                 children: [
                     {
@@ -25,7 +51,7 @@ const layout = {
                         component: () => import('@/views/Table/Users'),
                         meta: {
                             icon: 'idcard',
-                            role: [1, 2, 3, 4, 5, 6]
+                            roles: [1, 2, 3, 4, 5, 6]
                         },
                     }
                 ]
@@ -36,7 +62,7 @@ const layout = {
                 component: () => import('@/views/Article/index'),
                 meta: {
                     icon: 'file-markdown',
-                    role: [1, 2, 3, 4, 5, 6]
+                    roles: [1, 2, 3, 4, 5, 6]
                 },
                 children: [
                     {
@@ -45,7 +71,7 @@ const layout = {
                         component: () => import('@/views/Article/Posts'),
                         meta: {
                             icon: 'file-protect',
-                            role: [1, 2, 3, 4, 5, 6]
+                            roles: [1, 2, 3, 4, 5, 6]
                         },
                     },
                     {
@@ -54,7 +80,7 @@ const layout = {
                         component: () => import('@/views/Article/Editor'),
                         meta: {
                             icon: 'edit',
-                            role: [1, 2, 3, 4, 5, 6]
+                            roles: [1, 2, 3, 4, 5, 6]
                         },
                     }
                 ]
@@ -65,27 +91,27 @@ const layout = {
                 component: () => import('@/views/Tool/index'),
                 meta: {
                     icon: 'tool',
-                    role: [1, 2, 3, 4, 5, 6]
+                    roles: [1, 2, 3, 4, 5, 6]
                 },
                 children: [
                     {
-                    name: 'Notes',
-                    path: 'notes',
-                    component: () => import('@/views/Tool/Notes'),
-                    meta: {
-                        icon: 'book',
-                        role: [1, 2, 3, 4, 5, 6]
+                        name: 'Notes',
+                        path: 'notes',
+                        component: () => import('@/views/Tool/Notes'),
+                        meta: {
+                            icon: 'book',
+                            roles: [1, 2, 3, 4, 5, 6]
+                        },
                     },
-                },
-                {
-                    name: 'Board',
-                    path: 'board',
-                    component: () => import('@/views/Tool/Board'),
-                    meta: {
-                        icon: 'project',
-                        role: [1, 2, 3, 4, 5, 6]
+                    {
+                        name: 'Board',
+                        path: 'board',
+                        component: () => import('@/views/Tool/Board'),
+                        meta: {
+                            icon: 'project',
+                            roles: [1, 2, 3, 4, 5, 6]
+                        },
                     },
-                },
                 ]
             },
             {
@@ -94,11 +120,11 @@ const layout = {
                 component: () => import('@/views/Permission/index'),
                 meta: {
                     icon: 'team',
-                    role: [1, 2, 3, 4, 5, 6]
+                    roles: [1, 2, 3, 4, 5, 6]
                 },
-            },
-        ]
-
+            }
+        ],
+        menus: []
     },
     mutations: {
         UPDATE_MENUS: (state, menus) => {
@@ -106,16 +132,17 @@ const layout = {
         }
     },
     actions: {
-        initMenus: ({commit}) => {
-            const tmp = JSON.parse(localStorage.getItem('menus'));
+        initMenus: ({commit, state}) => {
+            const tmp = filterAsyncRoutes(state.base, 1);
             if (tmp !== undefined) {
                 commit('UPDATE_MENUS', tmp)
             }
         },
 
         changeMenus: ({commit}, menus) => {
-            localStorage.setItem('menus', JSON.stringify(menus));
-            commit('UPDATE_MENUS', menus)
+            commit('UPDATE_MENUS', menus);
+            resetRouter();
+            router.push('/')
         }
     }
 };
