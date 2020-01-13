@@ -30,16 +30,16 @@
                     this.$store.dispatch("afterEdit");
                     this.timer = setTimeout(() => {
                         this.$router.back();
-                    },1500);
+                    }, 1500);
                     return
                 }
                 this.$confirm({
                     title: 'Choose one operation types',
                     okText: 'save and post',
                     cancelText: 'save as draft',
-                    onOk: () =>  {
+                    onOk: () => {
                         this.$store.dispatch('updatePosts', {action: 'new', post: this.draft});
-                        this.$message.success((h) => h('span',['Article posted! ', h('a', {on: {click: () => this.$router.push({name: 'Posts'})}}, 'view')]),2);
+                        this.$message.success((h) => h('span', ['Article posted! ', h('a', {on: {click: () => this.$router.push({name: 'Posts'})}}, 'view')]), 2);
                     },
                     onCancel: () => {
                         this.$store.dispatch("updateDraft", {action: 'update', draft: this.draft});
