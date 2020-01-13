@@ -1,7 +1,7 @@
 <template>
 <section class="posts-wrapper">
     <h1>Posts</h1>
-    <a-row type="flex" justify="center" :gutter="40">
+    <a-row type="flex" justify="center" :gutter="20">
         <a-col ref="wrapper" @mouseenter="handleEnter(index)" @mouseleave="handleLeave(index)" class="items-wrapper" :span="6" v-for="(item, index) of $store.getters.posts" :key="index">
             <transition name="slide-fade">
                 <div v-if="toolbarVisible[index]" class="toolbar">

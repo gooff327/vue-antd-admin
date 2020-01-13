@@ -4,9 +4,7 @@
             <transition mode="out-in" name="component-fade">
                 <div class="logo">
                     <a-icon class="logo-icon" type="ant-design"/>
-                    <span v-if="!collapsed">
-          Vue Antd Admin
-        </span>
+                    <span v-if="!collapsed">Vue Antd Admin</span>
                 </div>
             </transition>
             <menu-utils :menus="$store.getters.menus"/>
@@ -32,7 +30,7 @@
                     <a-badge dot>
                         <a-icon type="notification" />
                     </a-badge>
-                    <a-popover trigger="click">
+                    <a-popover placement="bottom" trigger="click">
                         <a @click="reset" slot="content">Reset Permission</a>
                         <a-avatar class="avatar" icon="user" style="backgroundColor:#87d068"/>
                     </a-popover>

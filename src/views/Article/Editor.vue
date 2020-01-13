@@ -10,19 +10,27 @@
         name: "Editor",
         data() {
             return {
-                draft: ''
+                draft: '',
+                timer: null
             }
         },
         mounted() {
             this.draft = this.$store.getters.draft;
             this.editCursor = this.$store.getters.editCursor;
         },
+        beforeDestroy() {
+            clearTimeout(this.timer);
+        },
         methods: {
             handleSave() {
                 this.$refs['editor'].$el.style.zIndex = 0;
                 if (this.editCursor !== -1) {
                     this.$store.dispatch('updatePosts', {action: 'update', post: this.draft});
-                    this.$message.success((h) => h('span',['Article updated! ', h('a', {on: {click: () => this.$router.push({name: 'Posts'})}}, 'back')]), 2);
+                    this.$message.success('Post updated !', 2);
+                    this.$store.dispatch("afterEdit");
+                    this.timer = setTimeout(() => {
+                        this.$router.back();
+                    },1500);
                     return
                 }
                 this.$confirm({

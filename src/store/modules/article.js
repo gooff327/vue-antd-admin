@@ -38,6 +38,9 @@ const article = {
         },
         COPY_DRAFT: (state) => {
             state.draftCopy = state.draft
+        },
+        RECOVER_DRAFT: (state) => {
+            state.draft = state.draftCopy
         }
     },
     actions: {
@@ -56,6 +59,10 @@ const article = {
             commit('SET_CURSOR', index);
             commit('COPY_DRAFT');
             commit('SET_DRAFT', state.posts[state.editCursor])
+        },
+        afterEdit: ({commit}) => {
+            commit('RECOVER_DRAFT');
+            commit('SET_CURSOR', -1);
         },
         updatePosts: ({commit}, {action = 'new', post = '', index = 0}) => {
             switch (action) {
