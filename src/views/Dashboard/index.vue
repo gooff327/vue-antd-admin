@@ -2,7 +2,7 @@
     <section class="dashboard-wrapper">
         <a-row>
             <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <a-tooltip title="Stars of ant-design-vue">
+                <a-tooltip :mouse-enter-delay="0.5" title="Stars of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="star" type="star"/>
                         <span>{{this.stargazers_count}}</span>
@@ -10,7 +10,7 @@
                 </a-tooltip>
             </a-col>
             <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <a-tooltip title="Watch count of ant-design-vue">
+                <a-tooltip :mouse-enter-delay="0.5" title="Watch count of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="eye" type="eye"/>
                         <span>{{this.subscribers_count}}</span>
@@ -18,7 +18,7 @@
                 </a-tooltip>
             </a-col>
             <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <a-tooltip title="Forks of ant-design-vue">
+                <a-tooltip :mouse-enter-delay="0.5" title="Forks of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="save" type="save"/>
                         <span>{{this.forks}}</span>
@@ -26,7 +26,7 @@
                 </a-tooltip>
             </a-col>
             <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
-                <a-tooltip title="Issues of ant-design-vue">
+                <a-tooltip :mouse-enter-delay="0.5" title="Issues of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
                         <a-icon class="message" type="message"/>
                         <span>{{this.open_issues_count}}</span>
@@ -35,21 +35,21 @@
             </a-col>
         </a-row>
         <a-row>
-            <a-col class="wrapper" :span="24">
+            <a-col class="chart-wrapper" :span="24">
                 <canvas class="line-chart" style="position: relative; height:60vh; width:95%" ref="lineChart"/>
             </a-col>
         </a-row>
         <a-row>
-            <a-col class="wrapper" :span="6">
+            <a-col class="chart-wrapper" :span="6">
                 <canvas class="bar-chart" style="position: relative; height:40vh; width:95%" ref="barChart"/>
             </a-col>
-            <a-col class="wrapper" :span="6">
+            <a-col class="chart-wrapper" :span="6">
                 <canvas class="bubble-chart" style="position: relative; height:40vh; width:95%" ref="bubbleChart"/>
             </a-col>
-            <a-col class="wrapper" :span="6">
+            <a-col class="chart-wrapper" :span="6">
                 <canvas class="pie-chart" style="position: relative; height:40vh; width:95%" ref="pieChart"/>
             </a-col>
-            <a-col class="wrapper" :span="6">
+            <a-col class="chart-wrapper" :span="6">
                 <canvas class="radar-chart" style="position: relative; height:40vh; width:95%" ref="radarChart"/>
             </a-col>
         </a-row>
@@ -238,9 +238,18 @@
         position: relative;
         .wrapper
             background-color #fff
+            border 6px solid #f0f2f5
+            border-radius 8px
+        .chart-wrapper
+            background-color #fff
             padding 10px
             border 6px solid #f0f2f5
             border-radius 8px
+            &:hover
+                z-index 10
+                transition all .5s ease-in-out
+                box-shadow: 0 0 12px 2px rgba(189,189,189,.75);
+                border-color white
         .block-wrapper
             height 200px
             line-height 200px
@@ -251,8 +260,11 @@
             display flex
             justify-content center
             align-items center
+            border-color: white;
             &:hover
-                box-shadow: 0 0 12px 2px rgba(189,189,189,.5);
+                z-index 10
+                transition all .5s ease-in-out
+                box-shadow: 0 0 12px 2px rgba(189,189,189,.75);
             .star
                 color #42b983
             .eye
@@ -272,8 +284,6 @@
                 font-weight bold
                 font-size larger
                 font-family "Comic Sans MS"
-        .chart-wrapper
-            margin-top 20px
 
 
 
