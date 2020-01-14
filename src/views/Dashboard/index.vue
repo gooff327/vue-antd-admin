@@ -1,6 +1,6 @@
 <template>
     <section class="dashboard-wrapper">
-        <a-row>
+        <a-row class="row-top">
             <a-col class="wrapper" :lg="6" :md="6" :sm="12" :xl="6" :xs="12">
                 <a-tooltip :mouse-enter-delay="0.5" title="Stars of ant-design-vue">
                     <div @click="jumpToAntdRepo" class="block-wrapper">
@@ -34,12 +34,12 @@
                 </a-tooltip>
             </a-col>
         </a-row>
-        <a-row>
+        <a-row class="row-mid">
             <a-col class="chart-wrapper" :span="24">
                 <canvas class="line-chart" style="position: relative; height:60vh; width:95%" ref="lineChart"/>
             </a-col>
         </a-row>
-        <a-row>
+        <a-row class="row-bottom">
             <a-col class="chart-wrapper" :span="6">
                 <canvas class="bar-chart" style="position: relative; height:40vh; width:95%" ref="barChart"/>
             </a-col>
@@ -240,6 +240,8 @@
             background-color #fff
             border 6px solid #f0f2f5
             border-radius 8px
+        .row-top, .row-mid, .row-bottom
+            padding 6px 10px
         .chart-wrapper
             background-color #fff
             padding 10px
