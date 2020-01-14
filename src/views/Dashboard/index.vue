@@ -240,7 +240,9 @@
             background-color #fff
             border 6px solid #f0f2f5
             border-radius 8px
-        .row-top, .row-mid, .row-bottom
+        .row-top, .row-bottom
+            padding 0 10px
+        row-mid
             padding 6px 10px
         .chart-wrapper
             background-color #fff
