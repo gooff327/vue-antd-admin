@@ -1,5 +1,5 @@
 # vue-antd-admin
-
+![screenshot 2020-01-21 下午5.55.14.png](https://i.loli.net/2020/01/21/zkSfXUtBNYjWACw.png)
 ## Project setup
 ```
 yarn install
