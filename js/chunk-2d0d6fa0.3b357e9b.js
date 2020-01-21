@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d6fa0"],{"759e":function(e,n,t){"use strict";t.r(n);var r=function(){var e=this,n=e.$createElement;e._self._c;return e._m(0)},a=[function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("section",{staticClass:"notfound-wrapper"},[t("h1",[e._v("Error 401")]),t("p",[e._v("You don't have permission to this route")])])}],o={name:"index"},s=o,c=t("2877"),i=Object(c["a"])(s,r,a,!1,null,"e861baa0",null);n["default"]=i.exports}}]);
+//# sourceMappingURL=chunk-2d0d6fa0.3b357e9b.js.map
