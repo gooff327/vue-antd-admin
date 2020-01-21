@@ -36,7 +36,6 @@
             return {
 
                 columnHeader: true,
-                drag: false,
                 bordered: true,
                 footer: false,
                 columns : [

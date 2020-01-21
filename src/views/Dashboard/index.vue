@@ -142,11 +142,11 @@
                             maxBarThickness: 8,
                             minBarLength: 2,
                             label: "Front",
-                            backgroundColor: "rgba(195, 40, 96, 0.2)",
-                            borderColor: "rgba(195, 40, 96, 1)",
-                            pointBackgroundColor: "rgba(195, 40, 96, 1)",
-                            pointBorderColor: "rgba(2,0,4,0.38)",
-                            pointHoverBorderColor: "rgba(225,225,225,0.9)",
+                            backgroundColor: "rgba(246,114,128,0.35)",
+                            borderColor: "rgb(246,114,128)",
+                            pointBackgroundColor: "rgb(246,114,128)",
+                            pointBorderColor: "rgba(255,255,255,1)",
+                            pointHoverBorderColor: "rgb(255,252,107)",
                             data: []
                         },
                         {
@@ -155,11 +155,11 @@
                             maxBarThickness: 8,
                             minBarLength: 2,
                             label: "Middle",
-                            backgroundColor: "rgba(255, 172, 100, 0.2)",
-                            borderColor: "rgba(255, 172, 100, 1)",
-                            pointBackgroundColor: "rgba(255, 172, 100, 1)",
-                            pointBorderColor: "rgba(2,0,4,0.38)",
-                            pointHoverBorderColor: "rgba(225,225,225,0.9)",
+                            backgroundColor: "rgba(155,227,222, 0.35)",
+                            borderColor: "rgb(155,227,222)",
+                            pointBackgroundColor: "rgb(155,227,222)",
+                            pointBorderColor: "rgba(255,255,255,1)",
+                            pointHoverBorderColor: "rgb(255,252,107)",
                             data: []
                         },
                         {
@@ -168,11 +168,11 @@
                             maxBarThickness: 8,
                             minBarLength: 2,
                             label: "Back",
-                            backgroundColor: "rgba(19, 71, 34, 0.2)",
+                            backgroundColor: "rgba(19, 71, 34, 0.35)",
                             borderColor: "rgba(88, 188, 116, 1)",
                             pointBackgroundColor: "rgba(88, 188, 116, 1)",
-                            pointBorderColor: "rgba(2,0,4,0.38)",
-                            pointHoverBorderColor: "rgba(225,225,225,0.9)",
+                            pointBorderColor: "rgba(255,255,255,1)",
+                            pointHoverBorderColor: "rgb(255,252,107)",
                             data: []
                         }
                     ]
@@ -239,7 +239,9 @@
         .wrapper
             background-color #fff
             border 6px solid #f0f2f5
-            border-radius 8px
+            &:hover {
+                transition: all .5s ease;
+            }
         .row-top, .row-bottom
             padding 0 10px
         row-mid
@@ -266,7 +268,6 @@
             align-items center
             border-color: white;
             &:hover
-                z-index 10
                 transition all .5s ease-in-out
                 box-shadow: 0 0 12px 2px rgba(189,189,189,.75);
             .star

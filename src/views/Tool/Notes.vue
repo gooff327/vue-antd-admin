@@ -32,7 +32,7 @@
                     title: '',
                     content: ''
                 },
-                visible: false,
+                visible: true,
                 notes: [
                     {
                         title: 'longTitleTest1234124adssa',
