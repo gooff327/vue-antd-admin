@@ -12,25 +12,31 @@
                 :required="required"
         >
             <template v-if="Object.keys(children).length === 0">
-                <a-input
-                        v-if="type === 'input'"
-                        :value="value"
-                        :placeholder="placeholder"
-                        @input="handleValueChange"
-                        @change="handleValueChange"
-                />
-                <a-select
-                        v-if="type === 'select'"
-                        :value="value"
-                        @input="handleValueChange"
-                        @change="handleValueChange"
+                <validation-provider
+                        v-slot="{ errors }"
+                        :name="label"
+                        :rules="rule"
                 >
-                    <options
-                            v-for="(item, index) in option"
-                            :key="index"
-                            :value="item"
+                    <a-input
+                            v-if="type === 'input'"
+                            :value="value"
+                            :placeholder="placeholder"
+                            @input="handleValueChange"
+                            @change="handleValueChange"
                     />
-                </a-select>
+                    <a-select
+                            v-if="type === 'select'"
+                            :value="value"
+                            @input="handleValueChange"
+                            @change="handleValueChange"
+                    >
+                        <options
+                                v-for="(item, index) in option"
+                                :key="index"
+                                :value="item"
+                        />
+                    </a-select>
+                </validation-provider>
             </template>
             <template v-else>
                 <custom-form-item
@@ -45,6 +51,16 @@
 </template>
 
 <script>
+    import { ValidationProvider, extend } from 'vee-validate';
+    import * as rules from 'vee-validate/dist/rules';
+    import { messages } from 'vee-validate/dist/locale/zh_CN.json';
+
+    Object.keys(rules).forEach(rule => {
+        extend(rule, {
+            ...rules[rule], // copies rule configuration
+            message: messages[rule]
+        });
+    });
     export default {
         name: "CustomFormItem",
         props: {
