@@ -15,7 +15,7 @@
     "chart.js": "^2.9.3",
     "core-js": "^3.4.3",
     "mavon-editor": "^2.7.7",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "nprogress": "^0.2.0",
     "vue": "^2.6.10",
     "vue-masonry": "^0.11.8",
